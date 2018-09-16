@@ -1,0 +1,7 @@
+.text-danger {
+	color: #ff8a8a;
+}
+
+.invalid {
+	border: 1px red solid;
+}
