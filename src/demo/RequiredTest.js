@@ -1,5 +1,5 @@
 import React from "react";
-import { ValidationMessage, ValidationSummary, Required } from "../lib/CustomValidator";
+import { ValidationMessage, ValidationSummary, Required } from "../Validation/CustomValidator";
 
 export class RequiredText extends React.Component {
 	constructor(props) {
