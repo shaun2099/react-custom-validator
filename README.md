@@ -6,7 +6,7 @@
 - You can create your own validators as you like.
 
 
-## Step 1, import component and initialize a validation summary in constructor
+## Step 1  Import component and initialize a validation summary in constructor
 ```js
 import { ValidationMessage, ValidationSummary, Required, Email, MinLength, MaxLength, Number, True, SameAs } from "react-custom-validator";
 
@@ -16,7 +16,7 @@ constructor(props) {
 
 ```
 
-## Step 2 - use ValidationMessage after html input or wherever you like
+## Step 2  Use ValidationMessage after html input or wherever you like
 
 ``` jsx
 <input type="text" name="username" onChange={this.onChange} />
@@ -32,7 +32,7 @@ constructor(props) {
 * `eleStyle` optional, the style of html element when validation fails, usually it is a red border style 
 
 
-## Step 3 - handle validation summary
+## Step 3  Handle validation summary
 
 ``` js
 	validate = () => {
@@ -52,6 +52,8 @@ You are all set until now.
 If you want create your own validator:
 ## Customized validator
 
+Create your own validator by just creating and exporting a function like below, and use it together with other validators
+
 ``` js
 export const OnlyLetter = (message) => ({
 	validate: (value) => {
@@ -61,5 +63,20 @@ export const OnlyLetter = (message) => ({
 	errMessage: () => {
 		return message ? message : "Only letters are allowed";
 	}
+});
+
+export const MinLength = (length, message) => ({
+	validate: (value) => {
+		if (length < 1)
+			length = 1;
+		if (!value)
+			return false;
+		return String(value).length >= length
+	},
+	errMessage: () => {
+		if (length < 1)
+			length = 1;
+		return message ? message : "Minimum length " + length;
+	},
 });
 ```
