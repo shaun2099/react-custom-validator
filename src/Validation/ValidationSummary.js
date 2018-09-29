@@ -6,6 +6,11 @@ export const ValidationSummary = function () {
 		register: (validation) => {
 			validatoions.push(validation);
 		},
+		unregister: (validation) => {
+			let index = validatoions.indexOf(validation);
+			if (index > -1)
+				validatoions.splice(index, 1);
+		},
 		isValid: () => {
 			messages = [];
 			for (let index = 0; index < validatoions.length; index++) {
@@ -23,10 +28,10 @@ export const ValidationSummary = function () {
 
 export const Required = (message) => ({
 	validate: (value) => {
-		if (value === 0)
+		if (String(value) === "0")
 			return true;
 		if (typeof value === "string") {
-			return !!value.trim();
+			return !!(value.trim());
 		}
 		else {
 			return !!value;
@@ -40,8 +45,8 @@ export const Required = (message) => ({
 
 export const Email = (message) => ({
 	validate: (value) => {
-		if (!value)
-			return false;
+		if (!value && String(value) !== "0")
+			return true;
 		if (typeof value === "string") {
 			var regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 			return regex.test(String(value).toLowerCase());
@@ -86,6 +91,8 @@ export const MaxLength = (length, message) => ({
 
 export const Number = (message) => ({
 	validate: (value) => {
+		if (String(value) === "0")
+			return true;
 		if (!value)
 			return true;
 

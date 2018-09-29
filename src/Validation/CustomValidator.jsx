@@ -10,6 +10,11 @@ export class ValidationMessage extends React.Component {
 			this.props.vs.register(this);
 	}
 
+	componentWillUnmount() {
+		if (this.props.vs)
+			this.props.vs.unregister(this);
+	}
+
 	componentDidUpdate(prevProps) {
 		if (this.props.sync === true && prevProps.data !== this.props.data)
 			this.isValid();

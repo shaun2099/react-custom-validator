@@ -1,6 +1,6 @@
 {
   "name": "react-custom-validator",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "React custom validator for npm",
   "main": "dist/index.js",
   "license": "MIT",
